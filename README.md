@@ -2,8 +2,10 @@
 
 A modern, production-grade **Full-Stack Internship and Job Application Portal** connecting ambitious university students with verified technology companies and recruiters.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/24eg105b58-ship-it/Internship-Job-Portal)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/24eg105b58-ship-it/Internship-Job-Portal&root-directory=frontend&env=VITE_API_URL&envDescription=Your+deployed+Render+backend+URL+(e.g.+https://your-backend.onrender.com/api))
+### 🌐 Live Production Deployments
+- 💻 **Frontend Web App (Vercel)**: [https://frontend-phi-topaz-87.vercel.app](https://frontend-phi-topaz-87.vercel.app)
+- ⚙️ **Backend REST API (Render)**: [https://internship-portal-backend-nqvv.onrender.com](https://internship-portal-backend-nqvv.onrender.com)
+- 📖 **Swagger OpenAPI UI**: [https://internship-portal-backend-nqvv.onrender.com/swagger-ui/index.html](https://internship-portal-backend-nqvv.onrender.com/swagger-ui/index.html)
 
 ---
 
