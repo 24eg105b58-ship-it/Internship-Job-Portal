@@ -38,7 +38,7 @@ A modern, production-grade **Full-Stack Internship and Job Application Portal** 
 
 | Layer | Technologies |
 |---|---|
-| **Backend** | Java 17, Spring Boot 3.2.5, Spring Security 6, Spring Data JPA, Hibernate, JWT (io.jsonwebtoken 0.12.5), Lombok, Swagger/OpenAPI (SpringDoc 2.5) |
+| **Backend** | Java 17, Spring Boot 3.2.5, Spring Security 6, Spring Data JPA, Hibernate, JWT (io.jsonwebtoken 0.12.5), Lombok |
 | **Frontend** | React 18, TypeScript, Vite 5, Tailwind CSS 3.4, React Router DOM 6, Axios, Lucide React, Recharts |
 | **Database** | MySQL 8.0+ / H2 In-Memory (Configurable) |
 
