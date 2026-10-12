@@ -3,6 +3,7 @@
 -- Passwords below are BCrypt hashed for 'admin123', 'recruiter123', 'student123'
 -- =========================================================
 
+CREATE DATABASE IF NOT EXISTS internship_portal_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE internship_portal_db;
 
 -- 1. Insert Users
