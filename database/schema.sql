@@ -26,16 +26,16 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS students (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL UNIQUE,
-    university VARCHAR(150),
-    degree VARCHAR(100),
-    graduation_year INT,
-    cgpa DOUBLE,
-    skills VARCHAR(500),
+    university VARCHAR(150) DEFAULT 'University Student',
+    degree VARCHAR(100) DEFAULT 'B.Tech / B.S.',
+    graduation_year INT DEFAULT 2026,
+    cgpa DOUBLE DEFAULT 8.0,
+    skills VARCHAR(500) DEFAULT 'Software Engineering, Web Development',
     experience_years INT DEFAULT 0,
     github_url VARCHAR(255),
     linkedin_url VARCHAR(255),
     portfolio_url VARCHAR(255),
-    location VARCHAR(100),
+    location VARCHAR(100) DEFAULT 'Remote / Flexible',
     default_resume_id BIGINT,
     resume_path VARCHAR(255),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -52,9 +52,9 @@ CREATE TABLE IF NOT EXISTS recruiters (
     company_name VARCHAR(150) NOT NULL,
     company_website VARCHAR(255),
     company_description VARCHAR(1000),
-    designation VARCHAR(100),
+    designation VARCHAR(100) DEFAULT 'Talent Partner',
     company_logo VARCHAR(255),
-    location VARCHAR(100),
+    location VARCHAR(100) DEFAULT 'Remote',
     verified BOOLEAN NOT NULL DEFAULT TRUE,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -147,3 +147,63 @@ CREATE TABLE IF NOT EXISTS saved_jobs (
     CONSTRAINT fk_saved_jobs_job FOREIGN KEY (job_id) REFERENCES jobs(id) ON DELETE CASCADE,
     CONSTRAINT uk_saved_job_student_job UNIQUE (student_id, job_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================================
+-- Clean Formatted Views (For terminal queries & reporting)
+-- Prevents wide column terminal wrapping and makes tables readable
+-- =========================================================
+
+-- View 1: Clean Student Profiles
+CREATE OR REPLACE VIEW student_profiles_view AS
+SELECT 
+    s.id AS student_id,
+    u.full_name,
+    u.email,
+    s.university,
+    s.degree,
+    s.graduation_year AS grad_year,
+    s.cgpa,
+    s.skills,
+    s.location
+FROM students s
+JOIN users u ON s.user_id = u.id;
+
+-- View 2: Clean Recruiter Profiles
+CREATE OR REPLACE VIEW recruiter_profiles_view AS
+SELECT 
+    r.id AS recruiter_id,
+    u.full_name AS contact_name,
+    u.email,
+    r.company_name,
+    r.designation,
+    r.location,
+    r.verified
+FROM recruiters r
+JOIN users u ON r.user_id = u.id;
+
+-- View 3: Clean Job Listings
+CREATE OR REPLACE VIEW job_listings_view AS
+SELECT 
+    j.id AS job_id,
+    j.title,
+    j.company_name,
+    j.job_type,
+    j.location,
+    j.salary,
+    j.openings,
+    j.status
+FROM jobs j;
+
+-- View 4: Clean Application Statuses
+CREATE OR REPLACE VIEW applications_view AS
+SELECT 
+    a.id AS app_id,
+    u.full_name AS student_name,
+    j.title AS job_title,
+    j.company_name,
+    a.status,
+    a.applied_at
+FROM applications a
+JOIN students s ON a.student_id = s.id
+JOIN users u ON s.user_id = u.id
+JOIN jobs j ON a.job_id = j.id;

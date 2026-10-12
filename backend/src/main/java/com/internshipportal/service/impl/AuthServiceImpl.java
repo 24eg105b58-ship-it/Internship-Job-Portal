@@ -68,7 +68,15 @@ public class AuthServiceImpl implements AuthService {
         if (user.getRole() == Role.STUDENT) {
             Student student = Student.builder()
                     .user(user)
-                    .university(request.getUniversity() != null ? request.getUniversity().trim() : "")
+                    .university(request.getUniversity() != null && !request.getUniversity().isBlank()
+                            ? request.getUniversity().trim()
+                            : "University Student")
+                    .degree("B.Tech / B.S.")
+                    .graduationYear(java.time.LocalDate.now().getYear() + 2)
+                    .cgpa(8.0)
+                    .skills("Software Engineering, Web Development")
+                    .experienceYears(0)
+                    .location("Remote / Flexible")
                     .build();
             studentRepository.save(student);
         } else if (user.getRole() == Role.RECRUITER) {
